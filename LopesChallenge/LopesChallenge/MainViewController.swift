@@ -13,7 +13,8 @@ class MainViewController: UIViewController {
     var imageNameLabel: UILabel!
     var loremIpsumLabel: UILabel!
     var imageDateLabel: UILabel!
-    var catBlurryImage: UIImageView!
+    var blurryCatImage: UIImageView!
+    var powerfulCatImage: UIImageView!
     
     let padding: CGFloat = 16
     
@@ -24,23 +25,36 @@ class MainViewController: UIViewController {
         setupImageNameLabel()
         setupImageDateLabel()
         setupLoremIpsumLabel()
-        setupCatBlurryImage()
+        setupBlurryCatImage()
+        setupPowerfulCatImage()
     }
     
-    private func setupCatBlurryImage() {
-        catBlurryImage = UIImageView(image: .gatoBaixaQualidade)
-        catBlurryImage.translatesAutoresizingMaskIntoConstraints = false
-        catBlurryImage.contentMode = .scaleAspectFit
+    private func setupPowerfulCatImage() {
+        powerfulCatImage = UIImageView(image: .gatoTaPotente)
+        powerfulCatImage.translatesAutoresizingMaskIntoConstraints = false
+        powerfulCatImage.contentMode = .scaleAspectFit
 
-        view.addSubview(catBlurryImage)
+        view.addSubview(powerfulCatImage)
 
-        let aspectRatio = catBlurryImage.image!.size.height / catBlurryImage.image!.size.width
+        NSLayoutConstraint.activate([
+            powerfulCatImage.centerYAnchor.constraint(equalTo: blurryCatImage.centerYAnchor),
+            powerfulCatImage.leadingAnchor.constraint(equalTo: blurryCatImage.trailingAnchor, constant: padding),
+            powerfulCatImage.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding)
+        ])
+    }
+    
+    private func setupBlurryCatImage() {
+        blurryCatImage = UIImageView(image: .gatoBaixaQualidade)
+        blurryCatImage.translatesAutoresizingMaskIntoConstraints = false
+        blurryCatImage.contentMode = .scaleAspectFit
+
+        view.addSubview(blurryCatImage)
         
         NSLayoutConstraint.activate([
-            catBlurryImage.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 3 / 4),
-            catBlurryImage.heightAnchor.constraint(equalTo: catBlurryImage.widthAnchor, multiplier: aspectRatio),
-            catBlurryImage.topAnchor.constraint(equalTo: nadjaImage.bottomAnchor, constant: padding),
-            catBlurryImage.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: padding)
+            blurryCatImage.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 3 / 4),
+            blurryCatImage.heightAnchor.constraint(equalTo: blurryCatImage.widthAnchor),
+            blurryCatImage.topAnchor.constraint(equalTo: nadjaImage.bottomAnchor, constant: padding),
+            blurryCatImage.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: padding)
         ])
     }
     
