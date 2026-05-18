@@ -41,7 +41,8 @@ class MainViewController: UIViewController {
         
         NSLayoutConstraint.activate([
             dataPicker.topAnchor.constraint(equalTo: button.bottomAnchor, constant: padding * 3),
-            dataPicker.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding * 3)
+            dataPicker.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding * 3),
+            dataPicker.bottomAnchor.constraint(lessThanOrEqualTo: view.bottomAnchor, constant: -padding * 3)
         ])
     }
     
@@ -146,15 +147,16 @@ class MainViewController: UIViewController {
     private func setNajdaImage() {
         nadjaImage = UIImageView(image: .nadja)
         nadjaImage.translatesAutoresizingMaskIntoConstraints = false
-        nadjaImage.contentMode = .scaleAspectFit
-
+        nadjaImage.contentMode = .scaleAspectFill // NOTE: Isso foi para no iPad manter a proporção
+        nadjaImage.clipsToBounds = true // NOTE: Isso foi para no iPad manter a proporção
+        
         view.addSubview(nadjaImage)
 
         let aspectRatio = nadjaImage.image!.size.height / nadjaImage.image!.size.width
         
         NSLayoutConstraint.activate([
-            nadjaImage.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 2 / 3), // TODO: Mudar para 1 / 6 quando for landscape
-            nadjaImage.heightAnchor.constraint(equalTo: nadjaImage.widthAnchor, multiplier: aspectRatio),
+            nadjaImage.widthAnchor.constraint(lessThanOrEqualTo: view.widthAnchor, multiplier: 2 / 3), // TODO: Mudar para 1 / 6 quando for landscape
+            nadjaImage.heightAnchor.constraint(lessThanOrEqualTo: nadjaImage.widthAnchor, multiplier: aspectRatio),
             nadjaImage.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: padding),
             nadjaImage.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: padding)
         ])
