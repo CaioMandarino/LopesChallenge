@@ -13,6 +13,9 @@ class MainViewController: UIViewController {
     var imageNameLabel: UILabel!
     var loremIpsumLabel: UILabel!
     var imageDateLabel: UILabel!
+    var catBlurryImage: UIImageView!
+    
+    let padding: CGFloat = 16
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,6 +24,24 @@ class MainViewController: UIViewController {
         setupImageNameLabel()
         setupImageDateLabel()
         setupLoremIpsumLabel()
+        setupCatBlurryImage()
+    }
+    
+    private func setupCatBlurryImage() {
+        catBlurryImage = UIImageView(image: .gatoBaixaQualidade)
+        catBlurryImage.translatesAutoresizingMaskIntoConstraints = false
+        catBlurryImage.contentMode = .scaleAspectFit
+
+        view.addSubview(catBlurryImage)
+
+        let aspectRatio = catBlurryImage.image!.size.height / catBlurryImage.image!.size.width
+        
+        NSLayoutConstraint.activate([
+            catBlurryImage.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 3 / 4),
+            catBlurryImage.heightAnchor.constraint(equalTo: catBlurryImage.widthAnchor, multiplier: aspectRatio),
+            catBlurryImage.topAnchor.constraint(equalTo: nadjaImage.bottomAnchor, constant: padding),
+            catBlurryImage.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: padding)
+        ])
     }
     
     private func setupImageDateLabel() {
@@ -31,8 +52,6 @@ class MainViewController: UIViewController {
         
         view.addSubview(imageDateLabel)
         
-        let padding: CGFloat = 16
-
         NSLayoutConstraint.activate([
             imageDateLabel.bottomAnchor.constraint(equalTo: nadjaImage.bottomAnchor),
             imageDateLabel.leadingAnchor.constraint(equalTo: nadjaImage.trailingAnchor, constant: padding),
@@ -70,8 +89,6 @@ class MainViewController: UIViewController {
         
         view.addSubview(imageNameLabel)
         
-        let padding: CGFloat = 16
-
         NSLayoutConstraint.activate([
             imageNameLabel.topAnchor.constraint(equalTo: nadjaImage.topAnchor),
             imageNameLabel.leadingAnchor.constraint(equalTo: nadjaImage.trailingAnchor, constant: padding),
@@ -88,12 +105,12 @@ class MainViewController: UIViewController {
         view.addSubview(nadjaImage)
 
         let aspectRatio = nadjaImage.image!.size.height / nadjaImage.image!.size.width
-
+        
         NSLayoutConstraint.activate([
             nadjaImage.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 2 / 3), // TODO: Mudar para 1 / 6 quando for landscape
             nadjaImage.heightAnchor.constraint(equalTo: nadjaImage.widthAnchor, multiplier: aspectRatio),
-            nadjaImage.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
-            nadjaImage.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10)
+            nadjaImage.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: padding),
+            nadjaImage.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: padding)
         ])
     }
     
