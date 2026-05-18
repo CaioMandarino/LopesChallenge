@@ -15,6 +15,7 @@ class MainViewController: UIViewController {
     var imageDateLabel: UILabel!
     var blurryCatImage: UIImageView!
     var powerfulCatImage: UIImageView!
+    var button: UIButton!
     
     let padding: CGFloat = 16
     
@@ -27,6 +28,23 @@ class MainViewController: UIViewController {
         setupLoremIpsumLabel()
         setupBlurryCatImage()
         setupPowerfulCatImage()
+        setupButton()
+    }
+    
+    private func setupButton() {
+        var config = UIButton.Configuration.filled()
+        config.baseBackgroundColor = .systemBlue
+        config.baseForegroundColor = .white
+        config.title = "Button"
+        button = UIButton(configuration: config)
+        button.translatesAutoresizingMaskIntoConstraints = false
+
+        view.addSubview(button)
+        
+        NSLayoutConstraint.activate([
+            button.topAnchor.constraint(equalTo: blurryCatImage.bottomAnchor, constant: padding),
+            button.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding)
+        ])
     }
     
     private func setupPowerfulCatImage() {
