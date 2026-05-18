@@ -16,6 +16,7 @@ class MainViewController: UIViewController {
     var blurryCatImage: UIImageView!
     var powerfulCatImage: UIImageView!
     var button: UIButton!
+    var dataPicker: UIDatePicker!
     
     let padding: CGFloat = 16
     
@@ -29,6 +30,19 @@ class MainViewController: UIViewController {
         setupBlurryCatImage()
         setupPowerfulCatImage()
         setupButton()
+        setupDataPicker()
+    }
+    
+    private func setupDataPicker() {
+        dataPicker = UIDatePicker()
+        dataPicker.translatesAutoresizingMaskIntoConstraints = false
+        
+        view.addSubview(dataPicker)
+        
+        NSLayoutConstraint.activate([
+            dataPicker.topAnchor.constraint(equalTo: button.bottomAnchor, constant: padding * 3),
+            dataPicker.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding * 3)
+        ])
     }
     
     private func setupButton() {
