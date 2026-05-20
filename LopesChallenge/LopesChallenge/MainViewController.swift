@@ -53,12 +53,12 @@ class MainViewController: UIViewController {
         config.title = "Button"
         button = UIButton(configuration: config)
         button.translatesAutoresizingMaskIntoConstraints = false
-
+        
         view.addSubview(button)
         
         NSLayoutConstraint.activate([
             button.topAnchor.constraint(equalTo: blurryCatImage.bottomAnchor, constant: padding),
-            button.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding)
+            button.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -padding)
         ])
     }
     
@@ -70,6 +70,7 @@ class MainViewController: UIViewController {
         view.addSubview(powerfulCatImage)
 
         NSLayoutConstraint.activate([
+            powerfulCatImage.heightAnchor.constraint(lessThanOrEqualTo: blurryCatImage.heightAnchor),
             powerfulCatImage.centerYAnchor.constraint(equalTo: blurryCatImage.centerYAnchor),
             powerfulCatImage.leadingAnchor.constraint(equalTo: blurryCatImage.trailingAnchor, constant: padding),
             powerfulCatImage.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding)
@@ -84,7 +85,7 @@ class MainViewController: UIViewController {
         view.addSubview(blurryCatImage)
         
         NSLayoutConstraint.activate([
-            blurryCatImage.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 3 / 4),
+            blurryCatImage.widthAnchor.constraint(equalTo: nadjaImage.widthAnchor, multiplier: 1.1),
             blurryCatImage.heightAnchor.constraint(equalTo: blurryCatImage.widthAnchor),
             blurryCatImage.topAnchor.constraint(equalTo: nadjaImage.bottomAnchor, constant: padding),
             blurryCatImage.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: padding)
@@ -147,18 +148,19 @@ class MainViewController: UIViewController {
     private func setNajdaImage() {
         nadjaImage = UIImageView(image: .nadja)
         nadjaImage.translatesAutoresizingMaskIntoConstraints = false
-        nadjaImage.contentMode = .scaleAspectFill // NOTE: Isso foi para no iPad manter a proporção
-        nadjaImage.clipsToBounds = true // NOTE: Isso foi para no iPad manter a proporção
+        nadjaImage.contentMode = .scaleAspectFit
+        nadjaImage.backgroundColor = .blue
         
         view.addSubview(nadjaImage)
 
-        let aspectRatio = nadjaImage.image!.size.height / nadjaImage.image!.size.width
         
         NSLayoutConstraint.activate([
-            nadjaImage.widthAnchor.constraint(lessThanOrEqualTo: view.widthAnchor, multiplier: 2 / 3), // TODO: Mudar para 1 / 6 quando for landscape
-            nadjaImage.heightAnchor.constraint(lessThanOrEqualTo: nadjaImage.widthAnchor, multiplier: aspectRatio),
             nadjaImage.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: padding),
-            nadjaImage.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: padding)
+            nadjaImage.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: padding),
+            nadjaImage.heightAnchor.constraint(
+                equalTo: nadjaImage.widthAnchor,
+                multiplier: nadjaImage.image!.size.height / nadjaImage.image!.size.width
+            )
         ])
     }
     
