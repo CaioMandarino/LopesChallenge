@@ -53,6 +53,7 @@ class MainViewController: UIViewController {
         config.title = "Button"
         button = UIButton(configuration: config)
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.setContentCompressionResistancePriority(.required, for: .vertical)
         
         view.addSubview(button)
         
@@ -165,4 +166,3 @@ class MainViewController: UIViewController {
     }
     
 }
-
